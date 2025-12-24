@@ -7,7 +7,7 @@ function M.load(name)
   vim.cmd 'syntax reset'
 
   -- apply your theme file (Pattern A executes on require)
-  require('custom.themes.' .. name)
+  require('themes.' .. name)
 end
 
 return M
