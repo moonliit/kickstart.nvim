@@ -53,13 +53,6 @@ return {
     config = true,
   },
 
-  -- transparent.nvim
-  {
-    'xiyaowong/transparent.nvim',
-    lazy = false,
-    config = true,
-  },
-
   -- cord.nvim (Discord Rich Presence)
   {
     'vyfor/cord.nvim',
