@@ -10,9 +10,6 @@ return {
       'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
-      -- Useful status updates for LSP.
-      { 'j-hui/fidget.nvim', opts = {} },
-
       -- Allows extra capabilities provided by blink.cmp
       'saghen/blink.cmp',
     },
@@ -167,7 +164,18 @@ return {
           installRustc = false,
         },
         arduino_language_server = {},
-        ts_ls = {},
+        ts_ls = {
+          filetypes = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
+          cmd = { 'typescript-language-server', '--stdio' },
+          init_options = {
+            hostInfo = 'neovim',
+            preferences = {
+              disableSuggestions = false,
+              completeFunctionCalls = true,
+              format = false,
+            },
+          },
+        },
         lua_ls = {
           settings = {
             Lua = {
@@ -178,6 +186,17 @@ return {
             },
           },
         },
+        hls = {
+          filetypes = { 'haskell', 'lhaskell', 'cabal' }, -- Enable LSP for Haskell and Cabal files
+          settings = {
+            haskell = {
+              formattingProvider = 'ormolu', -- Use Ormolu for formatting
+              cabalFormattingProvider = 'cabalfmt',
+            },
+          },
+          root_dir = require('lspconfig.util').root_pattern('hie.yaml', 'stack.yaml', 'cabal.project', '*.cabal', 'package.yaml'),
+        },
+        dockerls = {},
       }
 
       -- Ensure the servers and tools above are installed

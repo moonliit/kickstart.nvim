@@ -31,8 +31,11 @@ return {
       telescope.setup {
         defaults = {
           file_ignore_patterns = {
-            --'node_modules',
+            'node_modules',
             '^.git/*',
+            '.venv/',
+            '__pycache__/',
+            'target',
           },
           hidden = true,
           no_ignore = true,
@@ -54,9 +57,12 @@ return {
       ------------------------------------------------------------------
 
       local find_files = '<cmd>Telescope find_files hidden=true no_ignore=true<CR>'
+      local notifs = '<cmd>Telescope notify<CR>'
+
       vim.keymap.set('n', '<CR>', find_files, { desc = 'Telescope: Find files' })
       vim.keymap.set('n', '<C-o>', builtin.live_grep, { desc = 'Telescope: Live grep' })
       vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = 'Telescope: Git files' })
+      vim.keymap.set('n', '<C-l>', notifs, { desc = 'Telescope: Git files' })
 
       -- Kickstart defaults
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })

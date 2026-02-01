@@ -14,6 +14,7 @@ return {
         'python',
         'diff',
         'html',
+        'css',
         'lua',
         'luadoc',
         'markdown',
@@ -23,9 +24,15 @@ return {
         'vimdoc',
         'javascript',
         'typescript',
+        'jsx',
+        'tsx',
         'json',
-        'css',
         'toml',
+        'dockerfile',
+        'haskell',
+        'bash',
+        'zsh',
+        'gitignore',
       },
 
       auto_install = true,
@@ -54,6 +61,13 @@ return {
         local ft = vim.api.nvim_buf_get_option(bufnr, 'filetype')
         if not ft or ft == '' then
           return
+        end
+
+        if ft == 'typescriptreact' then
+          ft = 'tsx'
+        end
+        if ft == 'sh' then
+          ft = 'zsh'
         end
 
         -- Check if a parser exists for this filetype

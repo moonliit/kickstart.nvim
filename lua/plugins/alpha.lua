@@ -38,7 +38,7 @@ return {
     end
 
     local function getUsername()
-      local names = { 'lua', 'moon', 'mint' }
+      local names = { 'lua', 'moon', 'moony' }
       return names[math.random(#names)]
     end
 

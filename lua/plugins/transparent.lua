@@ -31,6 +31,16 @@ return {
         'EndOfBuffer',
       },
 
+      extra_groups = {
+        'Pmenu',
+        'PmenuSel',
+        'PmenuBorder',
+        'NormalFloat',
+        'FloatBorder',
+        'CmpDocumentation',
+        'CmpDocumentationBorder',
+      },
+
       exclude_groups = {
         'CursorLine',
         'CursorLineNr',
@@ -38,6 +48,13 @@ return {
         'NeoTreeNormal',
         'NeoTreeNormalNC',
         'NeoTreeEndOfBuffer',
+        'Pmenu',
+        'PmenuSel',
+        'PmenuBorder',
+        'NormalFloat',
+        'FloatBorder',
+        'CmpDocumentation',
+        'CmpDocumentationBorder',
       },
     },
   },
