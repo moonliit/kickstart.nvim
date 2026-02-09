@@ -7,6 +7,7 @@ return {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
       'saadparwaiz1/cmp_luasnip',
       'L3MON4D3/LuaSnip',
       'onsails/lspkind.nvim',
@@ -24,6 +25,9 @@ return {
       vim.api.nvim_set_hl(0, 'PopMenu', { bg = 'none', blend = 0 })
       vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'none', blend = 0 })
       vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none', blend = 0 })
+      vim.api.nvim_set_hl(0, 'CmpItemSel', { link = 'PmenuSel' })
+      vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { link = 'Pmenu' })
+      vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { link = 'Pmenu' })
       vim.opt.winblend = 0
       vim.opt.pumblend = 0
 
@@ -47,6 +51,7 @@ return {
       }
 
       cmp.setup {
+
         -------------------------------------------------
         -- Snippets
         -------------------------------------------------
@@ -65,7 +70,7 @@ return {
         },
 
         -------------------------------------------------
-        -- Formatting (icons + kind)
+        -- Formatting
         -------------------------------------------------
         formatting = {
           format = lspkind.cmp_format {
@@ -76,43 +81,33 @@ return {
         },
 
         -------------------------------------------------
-        -- Keymaps
+        -- Smarter Tab Logic (KEY FIX)
         -------------------------------------------------
         mapping = cmp.mapping.preset.insert {
+
           ['<Tab>'] = cmp.mapping(function(fallback)
-            if luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            elseif cmp.visible() then
+            if cmp.visible() then
+              -- Always prioritize completion navigation
               cmp.select_next_item()
+            elseif luasnip.jumpable(1) then
+              -- Only jump if actually in snippet placeholder
+              luasnip.jump(1)
             else
               fallback()
             end
           end, { 'i', 's' }),
 
           ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            elseif cmp.visible() then
+            if cmp.visible() then
               cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
             else
               fallback()
             end
           end, { 'i', 's' }),
 
           ['<CR>'] = cmp.mapping.confirm { select = true },
-
-          ['<Up>'] = cmp.mapping(function(fallback)
-            fallback()
-          end, { 'i' }),
-          ['<Down>'] = cmp.mapping(function(fallback)
-            fallback()
-          end, { 'i' }),
-          ['<Left>'] = cmp.mapping(function(fallback)
-            fallback()
-          end, { 'i' }),
-          ['<Right>'] = cmp.mapping(function(fallback)
-            fallback()
-          end, { 'i' }),
 
           ['<C-d>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -128,6 +123,48 @@ return {
           { name = 'buffer', priority = 250, keyword_length = 3 },
         },
       }
+
+      -- Command mode completion (:)
+      cmp.setup.cmdline(':', {
+        window = {
+          completion = cmp.config.window.bordered(win_opt),
+        },
+
+        mapping = {
+          ['<CR>'] = cmp.mapping(function(fallback)
+            if cmp.visible() and cmp.get_selected_entry() then
+              cmp.confirm { select = false }
+            else
+              fallback()
+            end
+          end, { 'c' }),
+
+          ['<Tab>'] = cmp.mapping(function()
+            cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
+          end, { 'c' }),
+
+          ['<S-Tab>'] = cmp.mapping(function()
+            cmp.select_prev_item { behavior = cmp.SelectBehavior.Select }
+          end, { 'c' }),
+        },
+
+        completion = {
+          autocomplete = { cmp.TriggerEvent.TextChanged },
+        },
+
+        sources = cmp.config.sources({
+          { name = 'path' },
+        }, {
+          { name = 'cmdline' },
+        }),
+      })
+    end,
+  },
+  {
+    'roobert/tailwindcss-colorizer-cmp.nvim',
+    dependencies = { 'nvim-cmp' },
+    config = function()
+      require('tailwindcss-colorizer-cmp').setup()
     end,
   },
 }

@@ -175,16 +175,24 @@ hl(0, '@enum.variant', { fg = c.vibrant_green })
 hl(0, 'Include', { fg = c.pink })
 hl(0, 'token', { fg = c.vibrant_green })
 
+local hint_color = '#6272a4'
+local warn_color = '#fce094'
+
 -- === Diagnostics: undercurl colors & sign highlights ===
 hl(0, 'DiagnosticUnderlineError', { undercurl = true, sp = c.red })
-hl(0, 'DiagnosticUnderlineWarn', { undercurl = true, sp = c.sun })
-hl(0, 'DiagnosticUnderlineInfo', { undercurl = true, sp = c.blue })
-hl(0, 'DiagnosticUnderlineHint', { undercurl = true, sp = c.nord_blue })
+hl(0, 'DiagnosticUnderlineWarn', { underline = true, sp = warn_color })
+hl(0, 'DiagnosticUnderlineInfo', { underline = true, sp = c.blue })
+hl(0, 'DiagnosticHint', { italic = true, fg = hint_color })
+hl(0, 'DiagnosticUnnecessary', { italic = true, underline = true, sp = hint_color })
 
 hl(0, 'DiagnosticSignError', { fg = c.red })
-hl(0, 'DiagnosticSignWarn', { fg = c.sun })
+hl(0, 'DiagnosticSignWarn', { fg = warn_color })
 hl(0, 'DiagnosticSignInfo', { fg = c.blue })
-hl(0, 'DiagnosticSignHint', { fg = c.nord_blue })
+hl(0, 'DiagnosticSignHint', { fg = hint_color })
+
+-- this color is cool for hints and non important messages: '#6272a4'
+
+hl(0, 'DiagnosticVirtualTextHint', { fg = hint_color, italic = true })
 
 -- === Git signs (gitsigns / signcolumn) ===
 hl(0, 'GitSignsAdd', { fg = c.vibrant_green })
@@ -206,6 +214,15 @@ hl(0, 'DiagnosticFloatBorder', { fg = c.pink, bg = c.one_bg3 })
 -- lualine / separators
 hl(0, 'WinSeparator', { fg = '#d0a3ff', bg = 'NONE' })
 hl(0, 'VertSplit', { fg = '#d0a3ff', bg = 'NONE' })
+
+-- Rainbow Delimiters (nested bracket colors)
+hl(0, 'RainbowDelimiterRed', { fg = c.pink })
+hl(0, 'RainbowDelimiterYellow', { fg = c.yellow })
+hl(0, 'RainbowDelimiterBlue', { fg = c.blue })
+hl(0, 'RainbowDelimiterOrange', { fg = c.orange })
+hl(0, 'RainbowDelimiterGreen', { fg = c.green })
+hl(0, 'RainbowDelimiterViolet', { fg = c.purple })
+hl(0, 'RainbowDelimiterCyan', { fg = c.cyan })
 
 -- Fallback links (direct vim.cmd calls as you requested)
 vim.cmd 'hi link @variable Identifier'
@@ -253,16 +270,4 @@ vim.g.nonbinary_dark_palette = {
   statusline_bg = c.statusline_bg,
   pmenu_bg = c.pmenu_bg,
   folder_bg = c.folder_bg,
-}
-
--- Diagnostic config defaults (applied at colorscheme load)
-vim.diagnostic.config {
-  signs = true,
-  underline = true,
-  virtual_text = {
-    spacing = 2,
-    prefix = '●',
-  },
-  float = { border = 'rounded' },
-  update_in_insert = false,
 }

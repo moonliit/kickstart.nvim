@@ -59,4 +59,18 @@ return {
     event = 'VeryLazy',
     config = true,
   },
+
+  -- auto rename HTML tags
+  {
+    'windwp/nvim-ts-autotag',
+    event = 'InsertEnter',
+    opts = {},
+  },
+
+  -- better TS tools
+  {
+    'pmizio/typescript-tools.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+    opts = {},
+  },
 }

@@ -25,8 +25,12 @@ return {
           },
         }
 
-        vim.keymap.set('n', '<leader>h', '<cmd>Lspsaga hover_doc<CR>')
-        vim.keymap.set('n', '<leader>e', '<cmd>Lspsaga show_cursor_diagnostics<CR>')
+        vim.keymap.set('n', '<leader>e', '<cmd>Lspsaga show_line_diagnostics<CR>', { desc = 'Show current line diagnostics' })
+        vim.keymap.set('n', '<leader>r', '<cmd>Lspsaga diagnostic_jump_next<CR>', { desc = 'Jump to next diagnostic' })
+        vim.keymap.set('n', '<leader>R', '<cmd>Lspsaga diagnostic_jump_prev<CR>', { desc = 'Jump to prev diagnostic' })
+
+        vim.keymap.set('n', 'gh', '<cmd>Lspsaga hover_doc<CR>', { desc = 'Go to hover help doc' })
+        vim.keymap.set('n', 'gd', '<cmd>Lspsaga goto_definition<CR>', { desc = 'Go to definition' })
       end,
     },
   },

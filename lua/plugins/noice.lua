@@ -14,6 +14,14 @@ return {
         cmdline = {
           enabled = true,
           view = 'cmdline_popup',
+          format = {
+            search_down = {
+              icon = ' ↓',
+            },
+            search_up = {
+              icon = ' ↑',
+            },
+          },
         },
 
         messages = {

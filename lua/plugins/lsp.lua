@@ -114,7 +114,13 @@ return {
       vim.diagnostic.config {
         severity_sort = true,
         float = { border = 'rounded', source = 'if_many' },
-        underline = { severity = vim.diagnostic.severity.ERROR },
+        underline = {
+          severity = {
+            vim.diagnostic.severity.ERROR,
+            vim.diagnostic.severity.WARN,
+            vim.diagnostic.severity.INFO,
+          },
+        },
         signs = vim.g.have_nerd_font and {
           text = {
             [vim.diagnostic.severity.ERROR] = '󰅚 ',
@@ -126,6 +132,9 @@ return {
         virtual_text = {
           source = 'if_many',
           spacing = 2,
+          severity = {
+            min = vim.diagnostic.severity.HINT,
+          },
           format = function(diagnostic)
             local diagnostic_message = {
               [vim.diagnostic.severity.ERROR] = diagnostic.message,
@@ -142,7 +151,8 @@ return {
       --  By default, Neovim doesn't support everything that is in the LSP specification.
       --  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
       --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
-      local capabilities = require('blink.cmp').get_lsp_capabilities()
+      --local capabilities = require('blink.cmp').get_lsp_capabilities()
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
       -- Enable the following language servers
       local servers = {
@@ -158,7 +168,15 @@ return {
           filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'h' },
         },
         gopls = {},
-        pyright = {},
+        --pyright = {},
+        ruff_lsp = {
+          init_options = {
+            settings = {
+              format = true,
+              args = {}, -- extra ruff args if you want
+            },
+          },
+        },
         rust_analyzer = {
           installCargo = false,
           installRustc = false,
