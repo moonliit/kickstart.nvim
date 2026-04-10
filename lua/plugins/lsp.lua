@@ -151,8 +151,8 @@ return {
       --  By default, Neovim doesn't support everything that is in the LSP specification.
       --  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
       --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
-      --local capabilities = require('blink.cmp').get_lsp_capabilities()
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
+      -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
       -- Enable the following language servers
       local servers = {
@@ -168,32 +168,20 @@ return {
           filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'h' },
         },
         gopls = {},
-        --pyright = {},
-        ruff_lsp = {
-          init_options = {
-            settings = {
-              format = true,
-              args = {}, -- extra ruff args if you want
-            },
-          },
-        },
+        ty = {},
+        -- ruff_lsp = {
+        --   init_options = {
+        --     settings = {
+        --       format = true,
+        --       args = {}, -- extra ruff args if you want
+        --     },
+        --   },
+        -- },
         rust_analyzer = {
           installCargo = false,
           installRustc = false,
         },
         arduino_language_server = {},
-        ts_ls = {
-          filetypes = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
-          cmd = { 'typescript-language-server', '--stdio' },
-          init_options = {
-            hostInfo = 'neovim',
-            preferences = {
-              disableSuggestions = false,
-              completeFunctionCalls = true,
-              format = false,
-            },
-          },
-        },
         lua_ls = {
           settings = {
             Lua = {
@@ -216,6 +204,8 @@ return {
         },
         dockerls = {},
       }
+
+      vim.lsp.enable 'ty'
 
       -- Ensure the servers and tools above are installed
       --
@@ -242,9 +232,6 @@ return {
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
           end,

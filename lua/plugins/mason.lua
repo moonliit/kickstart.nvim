@@ -38,7 +38,7 @@ return {
           -- LSPs
           'lua-language-server',
           'pyright',
-          'ruff-lsp',
+          -- 'ruff-lsp',
           'clangd',
           'gopls',
           'typescript-language-server',

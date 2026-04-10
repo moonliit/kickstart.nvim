@@ -58,11 +58,14 @@ return {
 
       local find_files = '<cmd>Telescope find_files hidden=true no_ignore=true<CR>'
       local notifs = '<cmd>Telescope notify<CR>'
+      local lsp_references = '<cmd>Telescope lsp_references<CR>' -- todo:
 
       vim.keymap.set('n', '<CR>', find_files, { desc = 'Telescope: Find files' })
       vim.keymap.set('n', '<C-o>', builtin.live_grep, { desc = 'Telescope: Live grep' })
       vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = 'Telescope: Git files' })
       vim.keymap.set('n', '<C-l>', notifs, { desc = 'Telescope: Git files' })
+      vim.keymap.set('n', '[', builtin.grep_string, { desc = 'Telescope: Grep string' })
+      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Telescope: Find buffers' })
 
       -- Kickstart defaults
       -- vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
@@ -74,7 +77,6 @@ return {
       -- vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       -- vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       -- vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files' })
-      -- vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find buffers' })
 
       -- Advanced examples you had
       vim.keymap.set('n', '<leader>/', function()

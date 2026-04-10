@@ -39,7 +39,8 @@ return {
       highlight = {
         enable = true,
         -- keep ruby regex fallback as you had it; others use treesitter
-        additional_vim_regex_highlighting = { 'ruby' },
+        -- additional_vim_regex_highlighting = { 'ruby' },
+        additional_vim_regex_highlighting = true,
       },
 
       indent = {
