@@ -168,14 +168,6 @@ return {
         },
         gopls = {},
         ty = {},
-        -- ruff_lsp = {
-        --   init_options = {
-        --     settings = {
-        --       format = true,
-        --       args = {}, -- extra ruff args if you want
-        --     },
-        --   },
-        -- },
         rust_analyzer = {
           installCargo = false,
           installRustc = false,
