@@ -50,7 +50,12 @@ return {
           ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
           ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
           ['<CR>'] = { 'accept', 'fallback' },
-          ['<Esc>'] = { 'hide', 'fallback' },
+          ['<Esc>'] = {
+            function(cmp)
+              cmp.hide()
+              vim.cmd 'stopinsert'
+            end,
+          },
           ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
           ['<C-f>'] = { 'scroll_documentation_up', 'fallback' },
         },
