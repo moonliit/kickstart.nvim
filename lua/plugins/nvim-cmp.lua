@@ -133,6 +133,7 @@ return {
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       local lspkind = require 'lspkind'
+      local theme = require 'utils.theme'
 
       -------------------------------------------------
       -- Define a custom popup highlight group
@@ -143,27 +144,16 @@ return {
       vim.api.nvim_set_hl(0, 'CmpItemSel', { link = 'PmenuSel' })
       vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { link = 'Pmenu' })
       vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { link = 'Pmenu' })
-      vim.api.nvim_set_hl(0, 'CmpGhostText', {
-        fg = '#5c6370', -- subtle gray
-        bg = 'none',
-        italic = true,
-        blend = 0,
-      })
+      vim.api.nvim_set_hl(0, 'CmpGhostText', { link = theme.link_target('ThemeCmpGhostText', 'Comment') })
       vim.api.nvim_set_hl(0, 'CmpFloatNormal', { bg = 'NONE' })
       vim.api.nvim_set_hl(0, 'CmpDocNormal', { bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'CmpFloatBorder', {
-        bg = 'NONE',
-        fg = vim.g.nonbinary_dark_palette and vim.g.nonbinary_dark_palette.border or '#5c6370',
-      })
-      vim.api.nvim_set_hl(0, 'CmpDocBorder', {
-        bg = 'NONE',
-        fg = vim.g.nonbinary_dark_palette and vim.g.nonbinary_dark_palette.border or '#5c6370',
-      })
+      vim.api.nvim_set_hl(0, 'CmpFloatBorder', { link = theme.link_target('ThemeCmpFloatBorder', 'FloatBorder') })
+      vim.api.nvim_set_hl(0, 'CmpDocBorder', { link = theme.link_target('ThemeCmpFloatBorder', 'FloatBorder') })
 
       -- vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'NONE' })
       -- vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'NONE' })
       vim.api.nvim_set_hl(0, 'NormalFloat', { link = 'Normal' })
-      vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#5c6370' })
+      vim.api.nvim_set_hl(0, 'FloatBorder', { link = theme.link_target('ThemeFloatBorder', 'WinSeparator') })
       vim.opt.winblend = 0
       vim.opt.pumblend = 0
 
