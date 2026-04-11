@@ -1,6 +1,7 @@
 return {
   {
     'saghen/blink.cmp',
+    build = 'cargo +nightly build --release',
     version = '1.*',
     event = 'InsertEnter',
     dependencies = {
@@ -16,7 +17,7 @@ return {
       vim.api.nvim_set_hl(0, 'FloatBorder', { link = theme.link_target('ThemeFloatBorder', 'WinSeparator') })
 
       require('blink.cmp').setup {
-        fuzzy = { implementation = 'lua' },
+        fuzzy = { implementation = 'rust' },
         appearance = { nerd_font_variant = 'normal' },
         completion = {
           menu = {
