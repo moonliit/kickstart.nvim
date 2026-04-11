@@ -152,7 +152,6 @@ return {
       --  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
       --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
       local capabilities = require('blink.cmp').get_lsp_capabilities()
-      -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
       -- Enable the following language servers
       local servers = {
@@ -169,14 +168,6 @@ return {
         },
         gopls = {},
         ty = {},
-        -- ruff_lsp = {
-        --   init_options = {
-        --     settings = {
-        --       format = true,
-        --       args = {}, -- extra ruff args if you want
-        --     },
-        --   },
-        -- },
         rust_analyzer = {
           installCargo = false,
           installRustc = false,

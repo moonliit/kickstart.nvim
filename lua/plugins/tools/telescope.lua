@@ -67,17 +67,6 @@ return {
       vim.keymap.set('n', '[', builtin.grep_string, { desc = 'Telescope: Grep string' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Telescope: Find buffers' })
 
-      -- Kickstart defaults
-      -- vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
-      -- vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      -- vim.keymap.set('n', '<leader>sf', find_files, { desc = '[S]earch [F]iles' })
-      -- vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-      -- vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-      -- vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-      -- vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-      -- vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-      -- vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files' })
-
       -- Advanced examples you had
       vim.keymap.set('n', '<leader>/', function()
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
@@ -92,18 +81,15 @@ return {
         }
       end, { desc = 'Search in [O]pen Files' })
 
-      ------------------------------------------------------------------
-      -- Highlight overrides
-      ------------------------------------------------------------------
-      local hl = vim.api.nvim_set_hl
-      hl(0, 'TelescopeBorder', { fg = '#7aa2f7', bg = 'NONE' })
-      hl(0, 'TelescopePromptBorder', { fg = '#7aa2f7', bg = 'NONE' })
-      hl(0, 'TelescopeResultsBorder', { fg = '#7aa2f7', bg = 'NONE' })
-      hl(0, 'TelescopePreviewBorder', { fg = '#7aa2f7', bg = 'NONE' })
-
-      hl(0, 'TelescopePromptTitle', { fg = '#1abc9c', bg = 'NONE' })
-      hl(0, 'TelescopeResultsTitle', { fg = '#b390d6', bg = 'NONE' })
-      hl(0, 'TelescopePreviewTitle', { fg = '#f7768e', bg = 'NONE' })
+      local theme = require 'utils.theme'
+      local border = theme.link_target('ThemeFloatBorder', 'FloatBorder')
+      vim.api.nvim_set_hl(0, 'TelescopeBorder', { link = border })
+      vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { link = border })
+      vim.api.nvim_set_hl(0, 'TelescopeResultsBorder', { link = border })
+      vim.api.nvim_set_hl(0, 'TelescopePreviewBorder', { link = border })
+      vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { link = theme.link_target('ThemeTelescopePromptTitle', 'Title') })
+      vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { link = theme.link_target('ThemeTelescopeResultsTitle', 'Title') })
+      vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { link = theme.link_target('ThemeTelescopePreviewTitle', 'Title') })
     end,
   },
 }

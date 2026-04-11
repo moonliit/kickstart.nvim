@@ -248,3 +248,30 @@ sudo pacman -S --noconfirm --needed gcc make git ripgrep fd unzip neovim
 ```
 
 </details>
+
+
+## Project layout (Refactor v1)
+
+This config is now split into focused modules for maintainability:
+
+- `init.lua`: thin entrypoint that loads `lua/config/init.lua`.
+- `lua/config/globals.lua`: global flags (`mapleader`, `have_nerd_font`, `active_theme`).
+- `lua/config/options.lua`: Neovim options.
+- `lua/config/keymaps.lua`: keymaps.
+- `lua/config/autocmds.lua`: autocommands.
+- `lua/config/lazy.lua`: lazy.nvim bootstrap and plugin setup.
+- `lua/themes/*.lua`: theme implementations.
+- `lua/utils/theme.lua`: theme highlight helpers used by plugins.
+- `lua/plugins/coding`, `editor`, `lsp`, `syntax`, `tools`, `ui`: plugin specs grouped by concern.
+
+### Hot-swappable themes
+
+Set the theme name once in `lua/config/globals.lua`:
+
+```lua
+vim.g.active_theme = 'nonbinary-dark'
+```
+
+`lua/config/lazy.lua` loads `require('themes').load(vim.g.active_theme)`, so switching themes does not require editing plugin configs.
+
+Plugins should link to generic theme groups (for example `ThemeCmpGhostText` and `ThemeFloatBorder`) instead of hardcoded hex values.

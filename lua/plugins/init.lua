@@ -1,35 +1,16 @@
--- You can add your own plugins here or in other files in this directory!
---  I promise not to create any merge conflicts in this directory :)
---
--- See the kickstart.nvim README for more information
 return {
-  -- sleuth vim (auto indentation)
-  {
-    'tpope/vim-sleuth',
-    event = 'BufReadPost',
-  },
-
-  -- Icons (web-devicons)
-  {
-    'nvim-tree/nvim-web-devicons',
-    lazy = true,
-  },
-
-  -- fzf-lua
+  { 'tpope/vim-sleuth', event = 'BufReadPost' },
+  { 'nvim-tree/nvim-web-devicons', lazy = true },
   {
     'ibhagwan/fzf-lua',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = true,
   },
-
-  -- trouble.nvim
   {
     'folke/trouble.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = true,
   },
-
-  -- aerial.nvim (code outline)
   {
     'stevearc/aerial.nvim',
     dependencies = {
@@ -38,39 +19,20 @@ return {
     },
     config = true,
   },
-
-  -- trim.nvim (auto trim whitespace)
-  {
-    'cappyzawa/trim.nvim',
-    event = { 'BufReadPre', 'BufNewFile' },
-    config = true,
-  },
-
-  -- yanky.nvim
-  {
-    'gbprod/yanky.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = true,
-  },
-
-  -- cord.nvim (Discord Rich Presence)
-  {
-    'vyfor/cord.nvim',
-    event = 'VeryLazy',
-    config = true,
-  },
-
-  -- auto rename HTML tags
-  {
-    'windwp/nvim-ts-autotag',
-    event = 'InsertEnter',
-    opts = {},
-  },
-
-  -- better TS tools
+  { 'cappyzawa/trim.nvim', event = { 'BufReadPre', 'BufNewFile' }, config = true },
+  { 'gbprod/yanky.nvim', dependencies = { 'nvim-tree/nvim-web-devicons' }, config = true },
+  { 'vyfor/cord.nvim', event = 'VeryLazy', config = true },
+  { 'windwp/nvim-ts-autotag', event = 'InsertEnter', opts = {} },
   {
     'pmizio/typescript-tools.nvim',
     dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
     opts = {},
   },
+
+  { import = 'plugins.coding' },
+  { import = 'plugins.editor' },
+  { import = 'plugins.lsp' },
+  { import = 'plugins.syntax' },
+  { import = 'plugins.tools' },
+  { import = 'plugins.ui' },
 }

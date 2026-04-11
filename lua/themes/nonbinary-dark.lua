@@ -14,6 +14,7 @@ local c = {
   grey = '#6e6e76',
   grey_fg = '#15f371',
   grey_fg2 = '#7aaeb0',
+  muted = '#5c6370',
   light_grey = '#9fd6d8',
   line = '#8a4bbf',
   selection = '#2f4f73',
@@ -83,6 +84,14 @@ hl(0, 'Pmenu', { bg = c.pmenu_bg, fg = fg })
 hl(0, 'PmenuSel', { bg = selectionStrong, fg = '#ffffff' })
 hl(0, 'PmenuSbar', { bg = c.nvim_tree_bg })
 hl(0, 'PmenuThumb', { bg = selectionStrong })
+
+-- Plugin semantic groups (shared, reusable)
+hl(0, 'ThemeFloatBorder', { fg = c.muted, bg = 'NONE' })
+hl(0, 'ThemeCmpGhostText', { fg = c.muted, bg = 'NONE', italic = true })
+hl(0, 'ThemeCmpFloatBorder', { link = 'ThemeFloatBorder' })
+hl(0, 'ThemeTelescopePromptTitle', { fg = c.teal, bg = 'NONE' })
+hl(0, 'ThemeTelescopeResultsTitle', { fg = c.purple, bg = 'NONE' })
+hl(0, 'ThemeTelescopePreviewTitle', { fg = c.red, bg = 'NONE' })
 hl(0, 'Title', { fg = statusFg, bold = true })
 hl(0, 'TabLine', { bg = c.line_bg, fg = c.grey_fg2 })
 hl(0, 'TabLineSel', { bg = statusBg, fg = statusFg })
@@ -237,7 +246,7 @@ vim.cmd 'hi link @type Type'
 vim.cmd('hi Token guifg=' .. c.vibrant_green)
 
 -- Export a palette table for plugin use / user reference
-vim.g.nonbinary_dark_palette = {
+vim.g.theme_palette = {
   white = c.white,
   black = c.black,
   darker_black = c.darker_black,
@@ -248,6 +257,7 @@ vim.g.nonbinary_dark_palette = {
   grey = c.grey,
   grey_fg = c.grey_fg,
   grey_fg2 = c.grey_fg2,
+  muted = c.muted,
   light_grey = c.light_grey,
   line = c.line,
   selection = c.selection,
@@ -271,3 +281,6 @@ vim.g.nonbinary_dark_palette = {
   pmenu_bg = c.pmenu_bg,
   folder_bg = c.folder_bg,
 }
+
+-- Backward compatibility for existing plugin configs
+vim.g.nonbinary_dark_palette = vim.g.theme_palette

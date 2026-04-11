@@ -9,7 +9,6 @@ return {
         stages = 'slide',
         timeout = 3000,
         render = 'default',
-        background_colour = '#000000',
         max_width = 50,
         minimum_width = 50,
         merge_duplicates = true,
