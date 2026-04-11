@@ -262,6 +262,7 @@ This config is now split into focused modules for maintainability:
 - `lua/config/lazy.lua`: lazy.nvim bootstrap and plugin setup.
 - `lua/themes/*.lua`: theme implementations.
 - `lua/utils/theme.lua`: theme highlight helpers used by plugins.
+- `lua/plugins/coding`, `editor`, `lsp`, `syntax`, `tools`, `ui`: plugin specs grouped by concern.
 
 ### Hot-swappable themes
 

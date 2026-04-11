@@ -11,4 +11,13 @@ function M.link_target(preferred, fallback)
   return fallback
 end
 
+function M.palette()
+  return vim.g.theme_palette or {}
+end
+
+function M.color(name, fallback)
+  local palette = M.palette()
+  return palette[name] or fallback
+end
+
 return M
