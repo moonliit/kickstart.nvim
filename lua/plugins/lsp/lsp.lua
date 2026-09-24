@@ -179,7 +179,6 @@ return {
               completion = {
                 callSnippet = 'Replace',
               },
-              -- diagnostics = { disable = { 'missing-fields' } },
             },
           },
         },
@@ -192,6 +191,24 @@ return {
             },
           },
           root_dir = require('lspconfig.util').root_pattern('hie.yaml', 'stack.yaml', 'cabal.project', '*.cabal', 'package.yaml'),
+        },
+        omnisharp = {
+          cmd = { 'omnisharp', '--languageserver', '--hostPID', tostring(vim.fn.getpid()) },
+          root_dir = function(fname)
+            local util = require 'lspconfig.util'
+            return util.root_pattern('Assets', '*.sln', '*.csproj')(fname)
+          end,
+          settings = {
+            OmniSharp = {
+              AnalyzeOpenDocumentsOnly = false,
+              useModernNet = true,
+              RoslynExtensionsOptions = {
+                EnableAnalyzersSupport = true,
+                EnableImportCompletion = true,
+              },
+            },
+          },
+          filetypes = { 'cs' },
         },
         dockerls = {},
       }

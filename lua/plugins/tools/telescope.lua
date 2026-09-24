@@ -67,20 +67,6 @@ return {
       vim.keymap.set('n', '[', builtin.grep_string, { desc = 'Telescope: Grep string' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Telescope: Find buffers' })
 
-      -- Advanced examples you had
-      vim.keymap.set('n', '<leader>/', function()
-        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          previewer = false,
-        })
-      end, { desc = '[/] Fuzzy search current buffer' })
-
-      vim.keymap.set('n', '<leader>o', function()
-        builtin.live_grep {
-          grep_open_files = true,
-          prompt_title = 'Live Grep in Open Files',
-        }
-      end, { desc = 'Search in [O]pen Files' })
-
       local theme = require 'utils.theme'
       local border = theme.link_target('ThemeFloatBorder', 'FloatBorder')
       vim.api.nvim_set_hl(0, 'TelescopeBorder', { link = border })

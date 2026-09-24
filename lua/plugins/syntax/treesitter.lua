@@ -10,6 +10,7 @@ return {
         'bash',
         'c',
         'cpp',
+        'c_sharp',
         'rust',
         'python',
         'diff',
@@ -66,9 +67,10 @@ return {
 
         if ft == 'typescriptreact' then
           ft = 'tsx'
-        end
-        if ft == 'sh' then
+        elseif ft == 'sh' then
           ft = 'zsh'
+        elseif ft == 'cs' then
+          ft = 'c_sharp'
         end
 
         -- Check if a parser exists for this filetype
