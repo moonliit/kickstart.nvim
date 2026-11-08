@@ -164,7 +164,7 @@ return {
             '--query-driver=**/bin/*gcc;**/bin/*clang',
             '--header-insertion=never',
           },
-          filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'h' },
+          filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'h', 'hpp', 'tpp' },
         },
         gopls = {},
         ty = {},
